@@ -6,7 +6,7 @@ public class Planet {
 	public double mass;
 	public String imgFileName;
 
-	public static final double G = 6.67e-11;	// const declared as static final is a good practice.
+	private static final double G = 6.67e-11;	// const declared as static final is a good practice.
 
 	public Planet(double xP, double yP, double xV, double yV, double m, String img) {
 		xxPos = xP;

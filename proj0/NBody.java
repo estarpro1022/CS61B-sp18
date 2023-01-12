@@ -1,6 +1,6 @@
 public class NBody {
 	// remember to use data type
-	public static final int waitMillions = 10;
+	private static final int waitMillions = 10;
 	public static void main(String[] args) {
 		if (args.length == 0) {
 			System.out.println("You haven't given arguments!");
@@ -93,7 +93,7 @@ public class NBody {
 		return planets;
 	}
 
-	public static void playBackgroundMusic(String musicPath) {
+	private static void playBackgroundMusic(String musicPath) {
 		StdAudio.play(musicPath);
 	}
 }
