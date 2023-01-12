@@ -12,6 +12,10 @@ public class NBody {
 		String filename = args[2];
 		double radius = readRadius(filename);
 		Planet[] planets = readPlanets(filename);
+
+		
+		// Play music
+		playBackgroundMusic("audio/2001.mid");
 		
 		// parameter type: double, so int to double is ok, but double to int may cause precision loss.
 		StdDraw.setScale(-radius, radius);
@@ -87,5 +91,9 @@ public class NBody {
 			planets[i] = new Planet(xP, yP, xV, yV, mass, img);
 		}
 		return planets;
+	}
+
+	public static void playBackgroundMusic(String musicPath) {
+		StdAudio.play(musicPath);
 	}
 }
