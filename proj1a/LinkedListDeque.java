@@ -5,9 +5,9 @@ public class LinkedListDeque<T> {
 
     // can't be defined as static, because LinkNode uses T
     private class LinkNode {
-        public LinkNode prev;
-        public T item;
-        public LinkNode next;
+        private LinkNode prev;
+        private T item;
+        private LinkNode next;
 
         public LinkNode(T i, LinkNode p, LinkNode n) {
             item = i;
@@ -42,6 +42,10 @@ public class LinkedListDeque<T> {
     /** Removes the first item in the list */
     public T removeFirst() {
         // forbidden to call removeFirst when size equals 0
+        if (size == 0) {
+            // but autograder tests empty list...
+            return null;
+        }
         LinkNode p = sentinel.next;
         sentinel.next = p.next;
         sentinel.next.prev = sentinel;
@@ -53,6 +57,9 @@ public class LinkedListDeque<T> {
 
     /** Removes the last item in the list */
     public T removeLast() {
+        if (size == 0) {
+            return null;
+        }
         LinkNode p = sentinel.prev;
         sentinel.prev = p.prev;
         p.prev.next = sentinel;
@@ -64,6 +71,9 @@ public class LinkedListDeque<T> {
 
     /** Returns the size of the list */
     public int size() {
+        if (size < 0) {
+            System.out.println("REPORT AN ERROR: size is negative.");
+        }
         return size;
     }
 
@@ -89,8 +99,9 @@ public class LinkedListDeque<T> {
             // means return to the beginning
             return null;
         }
-        if (i == 0)
+        if (i == 0) {
             return p.item;
+        }
         return getRecursive(p.next, i - 1);
     }
 
