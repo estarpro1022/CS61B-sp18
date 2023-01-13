@@ -75,12 +75,28 @@ public class LinkedListDeque<T> {
     /** Gets ith item in the deque */
     public T get(int index) {
         int count = 0;
-        LinkNode p = sentinel;
+        LinkNode p = sentinel.next;
         while (count != index) {
             p = p.next;
             count++;
         }
         return p.item;
+    }
+
+    /** Helper method of getRecursive */
+    private T getRecursive(LinkNode p, int i) {
+        if (p == sentinel) {
+            // means return to the beginning
+            return null;
+        }
+        if (i == 0)
+            return p.item;
+        return getRecursive(p.next, i - 1);
+    }
+
+    /** Gets ith item in a recursive way */
+    public T getRecursive(int index) {
+        return getRecursive(sentinel.next, index);
     }
 
     /** Prints items in the deque from first to last */
