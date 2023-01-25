@@ -25,14 +25,14 @@ public class ArrayDeque<T> {
     public void addFirst(T item) {
         ifResize();
         items[nextFirst] = item;
-        nextFirst--;
+        nextFirst = nextFirst == 0 ? items.length - 1 : nextFirst - 1;
         size++;
     }
 
     public void addLast(T item) {
         ifResize();
         items[nextLast] = item;
-        nextLast++;
+        nextLast = nextLast == items.length - 1 ? 0 : nextLast + 1;
         size++;
     }
 
@@ -62,6 +62,10 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
+        // 空的deque删除不做操作
+        if (size == 0) {
+            return null;
+        }
         ifResize();
         int firstItemPos = (nextFirst + 1) % items.length;
         T item = items[firstItemPos];
@@ -72,6 +76,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
+        if (size == 0) {
+            return null;
+        }
         ifResize();
         int lastItemPos = nextLast == 0 ? items.length - 1 : nextLast - 1;
         T item = items[lastItemPos];
@@ -93,7 +100,7 @@ public class ArrayDeque<T> {
         return items[(nextFirst + 1 + index) % items.length];
     }
 
-    public void resize(int capacity) {
+    private void resize(int capacity) {
         T[] newItems = (T []) new Object[capacity];
         boolean[] isCopy = new boolean[items.length];
         int num = 0;
